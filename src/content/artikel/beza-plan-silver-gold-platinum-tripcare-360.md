@@ -1,12 +1,16 @@
 ---
-title: "Beza Plan Silver, Gold dan Platinum TripCare 360 Takaful"
-description: "Bandingkan plan Silver, Gold dan Platinum TripCare 360 Takaful (Etiqa): had perubatan, bagasi, pembatalan trip dan contoh caruman. Pilih ikut jenis perjalanan anda."
+title: Beza Plan Silver, Gold dan Platinum TripCare 360 Takaful
+description: 'Bandingkan plan Silver, Gold dan Platinum TripCare 360 Takaful (Etiqa): had perubatan, bagasi, pembatalan trip dan contoh caruman. Pilih ikut jenis perjalanan anda.'
 date: 2026-10-03
-cover: ""
-coverAlt: ""
-tags: ["TripCare 360", "Perbandingan plan"]
+cover: ''
+coverAlt: ''
+tags:
+  - TripCare 360
+  - Perbandingan plan
 draft: false
 ---
+
+![Hidup Anwar](/uploads/20261005-141354.webp)
 
 Kalau anda baru nak beli travel takaful, soalan pertama biasanya sama: Silver, Gold atau Platinum? Ketiga-tiga plan antarabangsa TripCare 360 Takaful (Etiqa) ada struktur benefit yang sama. Yang berbeza ialah had RM bagi setiap benefit, dan beberapa benefit yang hanya ada pada plan yang lebih tinggi.
 
@@ -15,7 +19,7 @@ Semua angka di bawah diambil daripada brosur rasmi TripCare 360 Takaful, dan ial
 ## Jadual perbandingan ringkas
 
 | Benefit | Silver | Gold | Platinum |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Perbelanjaan perubatan (kemalangan atau penyakit) | RM100,000 | RM300,000 | RM500,000 |
 | Kematian akibat kemalangan / hilang upaya kekal (dewasa) | RM100,000 | RM300,000 | RM500,000 |
 | Pembatalan atau pemendekan perjalanan | Tiada cover | RM20,000 | RM50,000 |
@@ -59,4 +63,4 @@ Perlu diingat, manfaat pembatalan trip memerlukan takaful didaftar tidak lewat 7
 
 Tak pasti plan mana yang sesuai? [WhatsApp Ammar](https://wa.me/60139292911?text=Hi%20Ammar%2C%20saya%20nak%20tanya%20beza%20plan%20TripCare%20360) dan ceritakan destinasi serta tarikh anda.
 
-*Maklumat dalam artikel ini adalah untuk rujukan dan bukan kontrak. Benefit, terma dan pengecualian lengkap terdapat dalam Sijil Takaful.*
+_Maklumat dalam artikel ini adalah untuk rujukan dan bukan kontrak. Benefit, terma dan pengecualian lengkap terdapat dalam Sijil Takaful._
