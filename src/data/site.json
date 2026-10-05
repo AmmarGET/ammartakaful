@@ -1,5 +1,5 @@
 {
-  "siteUrl": "https://ammartraveldraft.pages.dev",
+  "siteUrl": "https://ammartraveldraft.annurprosolutions.workers.dev",
   "name": "Ammar Naufal",
   "shortName": "Ammar",
   "tagline": "Ejen TripCare 360 Takaful",
@@ -17,7 +17,11 @@
     "ctaSecondary": "Tanya Ammar Dulu",
     "image": "/img/ammar.webp",
     "imageAlt": "Ammar Naufal, ejen TripCare 360 Takaful",
-    "chips": ["Cashless medical*", "Helpline 24/7", "Dilindungi PIDM"]
+    "chips": [
+      "Cashless medical*",
+      "Helpline 24/7",
+      "Dilindungi PIDM"
+    ]
   },
   "about": {
     "heading": "Saya Ammar Naufal, ejen TripCare 360 Takaful.",

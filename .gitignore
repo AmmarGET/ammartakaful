@@ -3,3 +3,5 @@ dist/
 .astro/
 public/admin/sveltia-cms.js
 .DS_Store
+.dev.vars
+.wrangler/
