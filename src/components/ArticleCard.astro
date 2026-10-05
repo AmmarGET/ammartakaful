@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { fmtDate } from '../lib';
+
+interface Props { entry: CollectionEntry<'artikel'> }
+const { entry } = Astro.props;
+const { title, description, date, cover, coverAlt } = entry.data;
+---
+<a class="art-card sweep" href={`/artikel/${entry.id}/`}>
+  <span class="art-img">
+    {cover
+      ? <img src={cover} alt={coverAlt || title} loading="lazy" width="800" height="450">
+      : <svg class="ic"><use href="#i-plane"/></svg>}
+  </span>
+  <span class="art-body">
+    <time datetime={date.toISOString().slice(0, 10)}>{fmtDate(date)}</time>
+    <h3>{title}</h3>
+    <p>{description}</p>
+    <span class="art-more">Baca artikel <svg class="ic"><use href="#i-arrow"/></svg></span>
+  </span>
+</a>

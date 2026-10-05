@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../lib';
+---
+<Base title={`Halaman tidak dijumpai | ${site.name}`} description="Halaman yang anda cari tidak dijumpai." path="/404/" noindex>
+  <section class="page-head dark" style="min-height:70vh;display:grid;align-content:center">
+    <div class="wrap narrow">
+      <p class="eyebrow">404</p>
+      <h1>Halaman tidak dijumpai</h1>
+      <p class="lead">Pautan mungkin sudah bertukar. Kembali ke laman utama atau semak harga terus.</p>
+      <div class="cta-row">
+        <a class="btn btn-y" href="/">Laman utama</a>
+        <a class="btn btn-ghost-l" href="/#semak-harga">Semak harga</a>
+      </div>
+    </div>
+  </section>
+</Base>

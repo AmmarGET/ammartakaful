@@ -1,0 +1,40 @@
+{
+  "siteUrl": "https://ammartraveldraft.pages.dev",
+  "name": "Ammar Naufal",
+  "shortName": "Ammar",
+  "tagline": "Ejen TripCare 360 Takaful",
+  "whatsapp": "60139292911",
+  "phoneDisplay": "013-929 2911",
+  "agentNo": "",
+  "defaultMessage": "Hi Ammar, saya nak tanya pasal TripCare 360 Takaful",
+  "hero": {
+    "eyebrow": "Ammar Naufal · Ejen TripCare 360 Takaful",
+    "line1": "Travel Takaful",
+    "line2": "Yang Mudah Semak,",
+    "line3": "Mudah Daftar.",
+    "lead": "Semak caruman TripCare 360 Takaful (Etiqa) ikut destinasi, tarikh dan siapa yang ikut serta. Pilih plan, kemudian WhatsApp Ammar untuk buat sijil.",
+    "ctaPrimary": "Semak Harga Sekarang",
+    "ctaSecondary": "Tanya Ammar Dulu",
+    "image": "/img/ammar.webp",
+    "imageAlt": "Ammar Naufal, ejen TripCare 360 Takaful",
+    "chips": ["Cashless medical*", "Helpline 24/7", "Dilindungi PIDM"]
+  },
+  "about": {
+    "heading": "Saya Ammar Naufal, ejen TripCare 360 Takaful.",
+    "text": "Saya bantu anda semak caruman, faham beza Silver, Gold dan Platinum, kemudian uruskan pendaftaran sijil sebelum anda bertolak. Kalau ada soalan tentang coverage atau claim, terus WhatsApp.",
+    "bullets": [
+      "Semak harga ikut destinasi dan tarikh",
+      "Terangkan beza plan dengan bahasa mudah",
+      "Bantu pendaftaran sebelum bertolak",
+      "Pandu anda bila perlu buat claim"
+    ],
+    "image": "/img/ammar.webp",
+    "imageAlt": "Ammar Naufal"
+  },
+  "socials": [],
+  "seo": {
+    "homeTitle": "Ammar Naufal | TripCare 360 Takaful (Etiqa) – Semak Harga Travel Takaful",
+    "homeDescription": "Semak caruman TripCare 360 Takaful (Etiqa) ikut destinasi, tarikh dan jenis traveller. Pilih Silver, Gold atau Platinum, kemudian terus WhatsApp Ammar Naufal untuk buat sijil.",
+    "ogImage": "/img/ammar.webp"
+  }
+}

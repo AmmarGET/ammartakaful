@@ -1,0 +1,317 @@
+---
+import Base from '../layouts/Base.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { marked } from 'marked';
+import faq from '../data/faq.json';
+import { site, wa, abs, getArticles } from '../lib';
+
+const latest = (await getArticles()).slice(0, 3);
+const jsonLd = [{
+  "@context": "https://schema.org",
+  "@type": "InsuranceAgency",
+  name: site.name,
+  description: site.seo.homeDescription,
+  url: abs('/'),
+  image: abs(site.hero.image),
+  telephone: `+${site.whatsapp}`
+}];
+---
+<Base title={site.seo.homeTitle} description={site.seo.homeDescription} ogImage={site.seo.ogImage} path="/" calc jsonLd={jsonLd}>
+<link slot="head" rel="preload" as="image" href={site.hero.image}>
+
+<section class="hero dark" aria-labelledby="h1">
+  <div class="hero-bg" aria-hidden="true"><span class="blk b1"></span><span class="blk b2"></span></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow" data-anim="left">{site.hero.eyebrow}</p>
+      <h1 id="h1">
+        <span class="ln" data-anim="left" style="--d:.05s">{site.hero.line1}</span>{" "}
+        <span class="ln y" data-anim="right" style="--d:.18s">{site.hero.line2}</span>{" "}
+        <span class="ln" data-anim="left" style="--d:.31s">{site.hero.line3}</span>
+      </h1>
+      <p class="lead" data-anim="up" style="--d:.45s">{site.hero.lead}</p>
+      <div class="cta-row" data-anim="up" style="--d:.55s">
+        <a class="btn btn-y" href="#semak-harga">{site.hero.ctaPrimary} <svg class="ic"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost-l" href={wa()} data-wa={site.defaultMessage} target="_blank" rel="noopener">{site.hero.ctaSecondary}</a>
+      </div>
+      <ul class="chips" data-anim="up" style="--d:.65s">
+        {site.hero.chips.map((c, i) => <li><svg class="ic"><use href={['#i-cross', '#i-clock', '#i-shield'][i % 3]}/></svg>{typeof c === 'string' ? c : c.text}</li>)}
+      </ul>
+    </div>
+
+    <div class="hero-art" data-anim="right" style="--d:.2s">
+      <div class="photo-frame">
+        <span class="photo-block" aria-hidden="true"></span>
+        <img class="photo" src={site.hero.image} width="832" height="1130" alt={site.hero.imageAlt} fetchpriority="high" data-parallax-img>
+        <div class="float f1"><span class="etiqa">Etiqa</span><div><b>TripCare 360 Takaful</b><small>oleh Etiqa General Takaful</small></div></div>
+        <div class="float f2"><svg class="ic"><use href="#i-plane"/></svg><div><b>RM100</b><small>Flight delay 2 jam, tanpa perlu claim</small></div></div>
+        <div class="float f3"><svg class="ic"><use href="#i-bag"/></svg><div><b>Bagasi hingga RM1,000</b><small>plan asas</small></div></div>
+      </div>
+      <p class="photo-cap"><b>{site.name}</b>{site.tagline}</p>
+    </div>
+  </div>
+  <p class="wrap foot-note">*Guarantee Letter disediakan untuk kemalangan atau penyakit semasa di luar negara. Tidak terpakai untuk penyakit sedia ada.</p>
+</section>
+
+<div class="band" aria-hidden="true"><div class="track" data-marquee>
+  <span>Cashless Medical Care</span><i></i><span>Flight Delay RM100</span><i></i><span>Bagasi hingga RM1,000</span><i></i><span>Helpline 24/7</span><i></i><span>Add-on COVID-19</span><i></i><span>Domestik &amp; Antarabangsa</span><i></i>
+</div></div>
+
+<!-- ===== KELEBIHAN ===== -->
+<section class="sec" id="kelebihan" aria-labelledby="h-kel">
+  <p class="ghost-text" aria-hidden="true" data-px="-1">TRIPCARE 360</p>
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow dk" data-anim="left">Kenapa TripCare 360</p>
+      <h2 id="h-kel" data-anim="right">Perlindungan yang anda perlukan bila berada jauh dari rumah</h2>
+    </header>
+    <div class="grid4" data-alt>
+      <article class="card sweep">
+        <span class="card-ic"><svg class="ic"><use href="#i-cross"/></svg></span>
+        <h3>Cashless Medical Care</h3>
+        <p>Guarantee Letter untuk kemalangan atau penyakit semasa di luar negara. Satu panggilan ke hotline 24/7 untuk kemasukan hospital tanpa bayaran awal. Tidak terpakai untuk penyakit sedia ada.</p>
+      </article>
+      <article class="card sweep">
+        <span class="card-ic"><svg class="ic"><use href="#i-bag"/></svg></span>
+        <h3>Kehilangan Bagasi</h3>
+        <p>Tuntutan bagasi dilindungi sehingga RM1,000 pada plan asas, lebih tinggi untuk Gold dan Platinum.</p>
+      </article>
+      <article class="card sweep">
+        <span class="card-ic"><svg class="ic"><use href="#i-clock"/></svg></span>
+        <h3>Travel Delay</h3>
+        <p>Dapat RM100 untuk kelewatan penerbangan 2 jam, walaupun tanpa menghantar tuntutan.</p>
+      </article>
+      <article class="card sweep">
+        <span class="card-ic"><svg class="ic"><use href="#i-shield"/></svg></span>
+        <h3>Add-On COVID-19</h3>
+        <p>Perlindungan tambahan untuk kejadian tidak dijangka akibat COVID-19 bagi perjalanan antarabangsa.</p>
+      </article>
+    </div>
+
+    <div class="elig" data-anim="up">
+      <div>
+        <h3>Siapa yang layak?</h3>
+        <ul class="tick">
+          <li><b>Individu / dewasa:</b> 16 hingga 70 tahun.</li>
+          <li><b>Warga emas:</b> 71 hingga 80 tahun.</li>
+          <li><b>Plan keluarga:</b> anak belum berkahwin, tidak bekerja, 45 hari hingga 18 tahun, atau bawah 23 tahun jika belajar sepenuh masa.</li>
+          <li><b>Warga asing:</b> boleh, jika bertolak dari dan pulang ke Malaysia.</li>
+        </ul>
+      </div>
+      <div class="elig-note">
+        <b>Penting</b>
+        <p>Perjalanan mesti bermula dari Malaysia. Daftar sebelum bertolak, dan digalakkan sekurang-kurangnya 7 hari lebih awal supaya manfaat pembatalan perjalanan (Gold dan Platinum) terpakai.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KALKULATOR ===== -->
+<section class="sec soft" id="semak-harga" aria-labelledby="h-calc">
+  <div class="wrap">
+    <header class="sec-head center">
+      <p class="eyebrow dk" data-anim="left">Semak harga</p>
+      <h2 id="h-calc" data-anim="right">Berapa caruman untuk trip anda?</h2>
+      <p class="sub" data-anim="up">Isi tarikh, destinasi dan jenis traveller. Harga untuk semua plan keluar serta-merta.</p>
+    </header>
+
+    <div class="calc">
+      <form class="calc-form" id="calcForm" novalidate autocomplete="off" data-anim="left">
+        <h3 class="step"><i>1</i>Detail trip</h3>
+
+        <div class="seg" role="radiogroup" aria-label="Jenis trip">
+          <label><input type="radio" name="mode" value="single" checked><span>Single Trip</span></label>
+          <label><input type="radio" name="mode" value="annual"><span>Annual</span></label>
+        </div>
+
+        <div id="singleFields">
+          <div class="row2">
+            <label class="fld"><span>Tarikh pergi</span><input type="date" id="dep" required></label>
+            <label class="fld"><span>Tarikh balik</span><input type="date" id="ret" required></label>
+          </div>
+          <p class="hint">Tarikh balik ialah tarikh anda tiba semula di Malaysia, supaya perlindungan penuh sehingga sampai.</p>
+
+          <div class="fld">
+            <label for="dest"><span>Negara / destinasi</span></label>
+            <div class="dest" id="destBox">
+              <div class="chips-in" id="destChips"></div>
+              <input type="text" id="dest" placeholder="Contoh: Jepun, Korea, Thailand, Turki" role="combobox" aria-expanded="false" aria-controls="sug" aria-autocomplete="list">
+              <ul class="sug" id="sug" role="listbox" hidden></ul>
+            </div>
+            <p class="hint">Boleh pilih lebih dari satu negara. Caruman ikut Area tertinggi. Taip nama negara atau bandar.</p>
+          </div>
+        </div>
+
+        <div id="annualFields" hidden>
+          <p class="fld-lab">Kawasan perlindungan</p>
+          <div class="areas" role="radiogroup" aria-label="Kawasan">
+            <label><input type="radio" name="area" value="1"><span><b>Domestik</b><small>Dalam Malaysia</small></span></label>
+            <label><input type="radio" name="area" value="2" checked><span><b>Area 2</b><small>Asia terpilih</small></span></label>
+            <label><input type="radio" name="area" value="3"><span><b>Area 3</b><small>Dunia tanpa USA &amp; Canada</small></span></label>
+            <label><input type="radio" name="area" value="4"><span><b>Area 4</b><small>Dunia termasuk USA &amp; Canada</small></span></label>
+          </div>
+          <p class="hint">Plan Annual: bilangan trip tanpa had, setiap trip antarabangsa tidak melebihi 90 hari (domestik 30 hari).</p>
+        </div>
+
+        <p class="fld-lab">Kategori traveller</p>
+        <div class="cats" role="radiogroup" aria-label="Kategori traveller">
+          <label><input type="radio" name="cat" value="ind" checked><span><svg class="ic"><use href="#i-user"/></svg><b>Individu</b><small>16 - 70 tahun</small></span></label>
+          <label><input type="radio" name="cat" value="senior"><span><svg class="ic"><use href="#i-user"/></svg><b>Warga Emas</b><small>71 - 80 tahun</small></span></label>
+          <label><input type="radio" name="cat" value="spouse"><span><svg class="ic"><use href="#i-heart"/></svg><b>Pasangan</b><small>Suami &amp; isteri</small></span></label>
+          <label><input type="radio" name="cat" value="family"><span><svg class="ic"><use href="#i-users"/></svg><b>Keluarga</b><small>Pasangan + anak</small></span></label>
+        </div>
+
+        <h3 class="step"><i>2</i>Tambahan pilihan <em>(optional)</em></h3>
+        <div class="addons" id="addons"></div>
+      </form>
+
+      <div class="calc-out" id="out" aria-live="polite" data-anim="right">
+        <div class="msg" id="msg">Lengkapkan tarikh dan destinasi dahulu. Plan akan keluar automatik di sini.</div>
+        <div class="plans" id="plans"></div>
+        <p class="fine" id="fine" hidden></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COVERAGE ===== -->
+<section class="sec" id="coverage" aria-labelledby="h-cov">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow dk" data-anim="left">Plan &amp; benefit</p>
+      <h2 id="h-cov" data-anim="right">Bandingkan Domestik, Silver, Gold dan Platinum</h2>
+      <p class="sub" data-anim="up">Had maksimum bagi setiap orang (RM). "Tiada cover" bermaksud benefit tidak termasuk dalam plan itu. Had keluarga ditunjukkan di bawah angka.</p>
+    </header>
+    <div class="tbl-wrap" data-anim="up"><table class="tbl" id="covTbl"></table></div>
+    <p class="fine">Jumlah liabiliti maksimum RM5,000,000 setiap sijil. Jika jumlah semua manfaat melebihi had ini, manfaat setiap orang dikurangkan secara berkadar. Senarai ini tidak lengkap, sila rujuk Sijil Takaful atau Product Disclosure Sheet.</p>
+
+    <h3 class="mini" data-anim="left">Manfaat pilihan</h3>
+    <div class="grid4 opt" data-alt>
+      <article class="card sweep"><h4>Aktiviti Lasak</h4><p>Kematian, hilang upaya kekal, perbelanjaan perubatan dan perkhidmatan kecemasan semasa aktiviti seperti rafting, selam skuba, ski, hiking gunung (had ketinggian terpakai) dan hot air balloon. Secara amatur untuk riadah dengan operator berlesen. Nepal dikecualikan.</p></article>
+      <article class="card sweep"><h4>COVID-19 <small>(antarabangsa)</small></h4><p>Pembatalan dan gangguan trip sehingga RM5,000 setiap satu, perbelanjaan perubatan luar negara hingga RM300,000, pemindahan kecemasan hingga RM100,000, serta repatriasi jenazah hingga RM100,000. Umur 61-80: had 50%.</p></article>
+      <article class="card sweep"><h4>Extended Home Care <small>(antarabangsa)</small></h4><p>Kehilangan atau kerosakan kandungan rumah akibat kecurian, kebakaran atau air semasa anda bercuti, sehingga RM20,000.</p></article>
+      <article class="card sweep"><h4>Golf Cover</h4><p>Peralatan golf dicuri sehingga RM1,000 (domestik) atau RM2,000 (antarabangsa), dan yuran green fee tidak terpakai sehingga RM500 atau RM1,000.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KAWASAN ===== -->
+<section class="sec soft" id="kawasan" aria-labelledby="h-area">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow dk" data-anim="left">Kawasan perlindungan</p>
+      <h2 id="h-area" data-anim="right">Destinasi anda masuk Area yang mana?</h2>
+    </header>
+    <div class="areas-info" data-alt>
+      <article class="a-card"><span class="a-n">1</span><h3>Area 1 · Domestik</h3><p>Dalam Malaysia.</p></article>
+      <article class="a-card"><span class="a-n">2</span><h3>Area 2 · Asia terpilih</h3><p>Bangladesh, Bhutan, Brunei, Cambodia, China (kecuali Mongolia), Hong Kong, India, Indonesia, Japan, Laos, Macau, Maldives, Pakistan, Philippines, Sikkim, Singapore, South Korea, Sri Lanka, Taiwan, Thailand, Timor Leste dan Vietnam.</p></article>
+      <article class="a-card"><span class="a-n">3</span><h3>Area 3</h3><p>Seluruh dunia kecuali Malaysia, USA dan Canada.</p></article>
+      <article class="a-card"><span class="a-n">4</span><h3>Area 4</h3><p>Seluruh dunia termasuk USA dan Canada (kecuali Malaysia).</p></article>
+    </div>
+    <div class="excl" data-anim="up">
+      <h3><svg class="ic"><use href="#i-pin"/></svg>Negara / kawasan yang dikecualikan</h3>
+      <p>Cuba, Iran, North Korea, Syria, Ukraine, Russia, Myanmar, Iraq, Palestine, Afghanistan, Belarus, Venezuela, Sudan, South Sudan, Israel, Antarctica, Nepal dan Libya. Perjalanan ke atau melalui negara ini tidak dilindungi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CLAIM ===== -->
+<section class="sec dark" id="claim" aria-labelledby="h-claim">
+  <p class="ghost-text on-dark" aria-hidden="true" data-px="1">CARA CLAIM</p>
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow" data-anim="left">Cara claim</p>
+      <h2 id="h-claim" data-anim="right">Langkah bila anda perlu buat tuntutan</h2>
+    </header>
+    <ol class="steps" data-alt>
+      <li class="card sweep dk-card"><span class="sn">1</span><h3>Hubungi helpline dahulu</h3><p>Untuk kecemasan atau kemasukan hospital di luar negara, hubungi Travel &amp; Medical Assistance 24/7 di <a href="tel:+60327856565">+603-2785 6565</a>. Guarantee Letter tertakluk kelulusan.</p></li>
+      <li class="card sweep dk-card"><span class="sn">2</span><h3>Simpan semua dokumen</h3><p>Contohnya resit rasmi, laporan perubatan dan laporan polis jika berlaku kehilangan. Senarai penuh ada dalam Sijil Takaful anda.</p></li>
+      <li class="card sweep dk-card"><span class="sn">3</span><h3>Hantar secepat mungkin</h3><p>Disyorkan dalam 24 jam dan tidak lewat 30 hari dari tarikh kejadian, melalui app Etiqa+. Claims Careline: <a href="tel:1300881007">1 300 88 1007</a>.</p></li>
+      <li class="card sweep dk-card"><span class="sn">4</span><h3>Tanya {site.shortName} jika buntu</h3><p>Tak pasti dokumen atau langkah seterusnya? WhatsApp {site.shortName} untuk dipandu.</p></li>
+    </ol>
+
+    <div class="assist" data-anim="up">
+      <div>
+        <h3>Bantuan Perjalanan &amp; Perubatan 24 jam</h3>
+        <p>Beroperasi 24 jam, 7 hari seminggu, 365 hari setahun. Lebih 400,000 penyedia perkhidmatan di seluruh dunia dan menyokong 40 bahasa.</p>
+        <ul class="tick y">
+          <li>Kehilangan bagasi, pasport atau dokumen</li>
+          <li>Nasihat pra-perjalanan, jadual penerbangan, tempahan</li>
+          <li>Rujukan perubatan 24 jam, temujanji doktor tempatan, penghantaran ubat penting</li>
+          <li>Perkhidmatan terjemahan dan jurubahasa</li>
+          <li>Pengaturan lawatan penuh kasih sayang dan bayaran pendahuluan</li>
+        </ul>
+      </div>
+      <div class="assist-n">
+        <a class="big-n" href="tel:+60327856565"><small>Helpline kecemasan</small>+603-2785 6565</a>
+        <a class="big-n" href="tel:1300881007"><small>Claims careline</small>1 300 88 1007</a>
+        <p class="fine">Bagi tuntutan pesakit luar di luar negara di bawah RM3,000, bayar dahulu dan tuntut balik (reimbursement).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec accent" id="tentang" aria-labelledby="h-ten">
+  <div class="wrap about">
+    <div class="about-img" data-anim="left"><img src={site.about.image} width="832" height="1130" loading="lazy" alt={site.about.imageAlt}></div>
+    <div class="about-copy" data-anim="right">
+      <p class="eyebrow dk2">Tentang {site.shortName}</p>
+      <h2 id="h-ten">{site.about.heading}</h2>
+      <p>{site.about.text}</p>
+      <ul class="tick k">
+        {site.about.bullets.map(b => <li>{typeof b === 'string' ? b : b.text}</li>)}
+      </ul>
+      <a class="btn btn-k" href={wa(`Hi ${site.shortName}, saya nak semak harga TripCare 360 Takaful`)} data-wa={`Hi ${site.shortName}, saya nak semak harga TripCare 360 Takaful`} target="_blank" rel="noopener"><svg class="ic fill"><use href="#i-wa"/></svg>WhatsApp {site.phoneDisplay}</a>
+      {site.agentNo && <p class="agent-no">No. pendaftaran ejen: {site.agentNo}</p>}
+    </div>
+  </div>
+</section>
+
+<!-- ===== ARTIKEL ===== -->
+{latest.length > 0 && (
+<section class="sec soft" id="artikel" aria-labelledby="h-art">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow dk" data-anim="left">Artikel</p>
+      <h2 id="h-art" data-anim="right">Panduan travel takaful untuk anda</h2>
+    </header>
+    <div class="art-grid" data-alt>
+      {latest.map(a => <ArticleCard entry={a} />)}
+    </div>
+    <p class="more"><a class="btn btn-line" href="/artikel/">Semua artikel <svg class="ic"><use href="#i-arrow"/></svg></a></p>
+  </div>
+</section>
+)}
+
+<!-- ===== FAQ ===== -->
+<section class="sec" id="faq" aria-labelledby="h-faq">
+  <div class="wrap faq-wrap">
+    <header class="sec-head">
+      <p class="eyebrow dk" data-anim="left">Soalan lazim</p>
+      <h2 id="h-faq" data-anim="right">FAQ TripCare 360 Takaful</h2>
+    </header>
+    <div class="faq" data-anim="up">
+      {faq.items.map(f => <details><summary>{f.q}</summary><div class="ans" set:html={marked.parse(f.a)} /></details>)}
+    </div>
+  </div>
+</section>
+
+<!-- ===== MUAT TURUN + CTA ===== -->
+<section class="sec dark cta-sec" aria-labelledby="h-cta">
+  <div class="wrap cta-grid">
+    <div data-anim="left">
+      <p class="eyebrow">Sedia untuk bertolak?</p>
+      <h2 id="h-cta">Semak harga dulu, kemudian WhatsApp Ammar.</h2>
+      <div class="cta-row">
+        <a class="btn btn-y" href="#semak-harga">Semak Harga <svg class="ic"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost-l" href={wa()} data-wa={site.defaultMessage} target="_blank" rel="noopener"><svg class="ic fill"><use href="#i-wa"/></svg>WhatsApp {site.shortName}</a>
+      </div>
+    </div>
+    <a class="dl-card" href="pdf/TripCare360-Brosur-Etiqa.pdf" target="_blank" rel="noopener" data-anim="right">
+      <span class="dl-ic"><svg class="ic"><use href="#i-dl"/></svg></span>
+      <span><b>Brosur rasmi TripCare 360 Takaful</b><small>PDF · jadual benefit, caruman, FAQ dan pengecualian (Etiqa)</small></span>
+    </a>
+  </div>
+</section>
+
+</Base>

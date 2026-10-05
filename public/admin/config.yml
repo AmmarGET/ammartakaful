@@ -1,0 +1,172 @@
+# Konfigurasi panel admin (Sveltia CMS). base_url ditetapkan automatik dalam admin/index.html.
+backend:
+  name: github
+  repo: annurprosolutions-cell/ammartraveldraft
+  branch: main
+  auth_scope: repo
+  commit_messages:
+    create: 'CMS: tambah {{collection}} "{{slug}}"'
+    update: 'CMS: kemas kini {{collection}} "{{slug}}"'
+    delete: 'CMS: padam {{collection}} "{{slug}}"'
+    uploadMedia: 'CMS: upload {{path}}'
+    deleteMedia: 'CMS: padam {{path}}'
+
+logo_url: /icons/icon-192.png
+show_preview_links: true
+
+media_folder: public/uploads
+public_folder: /uploads
+media_libraries:
+  default:
+    config:
+      max_file_size: 8388608
+      slugify_filename: true
+      transformations:
+        raster_image:
+          format: webp
+          quality: 82
+          width: 1600
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: artikel
+    label: Artikel
+    label_singular: Artikel
+    description: Tulis artikel SEO. Setiap artikel jadi halaman sendiri di /artikel/.
+    folder: src/content/artikel
+    create: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    summary: '{{title}}'
+    sortable_fields: [date, title]
+    editor:
+      preview: false
+    fields:
+      - label: Tajuk
+        name: title
+        widget: string
+        hint: 'Letak kata kunci utama di bahagian awal. Elok dalam 60 hingga 70 aksara supaya tidak terpotong di Google.'
+      - label: Penerangan Google (meta description)
+        name: description
+        widget: text
+        hint: 'Ringkasan yang keluar bawah tajuk di Google. Mesti 50 hingga 170 aksara.'
+        pattern: ['^[\s\S]{50,170}$', 'Mesti antara 50 hingga 170 aksara.']
+      - label: Tarikh terbit
+        name: date
+        widget: datetime
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+        format: 'YYYY-MM-DD'
+        picker_utc: true
+      - label: Gambar utama
+        name: cover
+        widget: image
+        required: false
+        hint: 'Pilihan. Gambar dikecilkan automatik semasa upload (maksimum 8 MB).'
+      - label: Teks alternatif gambar
+        name: coverAlt
+        widget: string
+        required: false
+        hint: 'Terangkan gambar dalam satu ayat. Penting untuk SEO dan pembaca skrin.'
+      - label: Tag
+        name: tags
+        widget: list
+        required: false
+        field: { label: Tag, name: tag, widget: string }
+      - label: Draf (tidak diterbitkan)
+        name: draft
+        widget: boolean
+        default: false
+        hint: 'Hidupkan jika artikel belum siap. Draf tidak keluar di laman web.'
+      - label: Kandungan
+        name: body
+        widget: markdown
+        hint: 'Guna tajuk kecil (H2) untuk setiap bahagian. Letak pautan ke /#semak-harga supaya pembaca terus ke kalkulator.'
+
+  - name: tetapan
+    label: Tetapan Laman
+    description: Tukar gambar, nombor telefon, teks utama dan FAQ.
+    editor:
+      preview: false
+    files:
+      - name: site
+        label: Tetapan Utama
+        file: src/data/site.json
+        format: json
+        fields:
+          - label: URL laman web
+            name: siteUrl
+            widget: string
+            hint: 'Contoh: https://namadomain.com (tanpa / di hujung). Tukar selepas domain disambungkan. Digunakan untuk sitemap dan SEO.'
+            pattern: ['^https?://[^/\s]+$', 'Mesti bermula https:// dan tanpa / di hujung.']
+          - { label: Nama penuh, name: name, widget: string }
+          - { label: 'Nama pendek (cth: Ammar, untuk butang "WhatsApp Ammar")', name: shortName, widget: string }
+          - { label: Tagline, name: tagline, widget: string }
+          - label: Nombor WhatsApp
+            name: whatsapp
+            widget: string
+            hint: 'Format antarabangsa tanpa + atau sengkang. Contoh: 60139292911'
+            pattern: ['^60\d{8,10}$', 'Mesti bermula 60 dan hanya nombor. Contoh: 60139292911']
+          - { label: Nombor telefon (dipaparkan), name: phoneDisplay, widget: string }
+          - { label: 'No. pendaftaran ejen (pilihan, keluar di footer)', name: agentNo, widget: string, required: false }
+          - { label: Mesej WhatsApp lalai, name: defaultMessage, widget: string }
+          - label: Bahagian utama (Hero)
+            name: hero
+            widget: object
+            fields:
+              - { label: Teks kecil atas tajuk, name: eyebrow, widget: string }
+              - { label: Tajuk baris 1, name: line1, widget: string }
+              - { label: Tajuk baris 2 (kuning), name: line2, widget: string }
+              - { label: Tajuk baris 3, name: line3, widget: string }
+              - { label: Ayat pengenalan, name: lead, widget: text }
+              - { label: Butang utama, name: ctaPrimary, widget: string }
+              - { label: Butang kedua, name: ctaSecondary, widget: string }
+              - { label: Gambar hero, name: image, widget: image, hint: 'Gambar menegak (portrait) paling sesuai.' }
+              - { label: Teks alternatif gambar, name: imageAlt, widget: string }
+              - label: Lencana kecil
+                name: chips
+                widget: list
+                field: { label: Teks, name: text, widget: string }
+          - label: Bahagian Tentang
+            name: about
+            widget: object
+            fields:
+              - { label: Tajuk, name: heading, widget: string }
+              - { label: Perenggan, name: text, widget: text }
+              - label: Senarai perkara
+                name: bullets
+                widget: list
+                field: { label: Teks, name: text, widget: string }
+              - { label: Gambar, name: image, widget: image }
+              - { label: Teks alternatif gambar, name: imageAlt, widget: string }
+          - label: Media sosial (pilihan)
+            name: socials
+            widget: list
+            required: false
+            fields:
+              - { label: 'Nama (cth: TikTok)', name: label, widget: string }
+              - { label: 'Singkatan 2 huruf (cth: TT)', name: short, widget: string }
+              - { label: Pautan, name: url, widget: string }
+          - label: SEO halaman utama
+            name: seo
+            widget: object
+            fields:
+              - { label: Tajuk halaman (title), name: homeTitle, widget: string }
+              - { label: Penerangan Google, name: homeDescription, widget: text }
+              - { label: Gambar kongsi (WhatsApp/Facebook), name: ogImage, widget: image }
+      - name: faq
+        label: Soalan Lazim (FAQ)
+        file: src/data/faq.json
+        format: json
+        fields:
+          - label: Soalan dan jawapan
+            name: items
+            widget: list
+            summary: '{{fields.q}}'
+            fields:
+              - { label: Soalan, name: q, widget: string }
+              - { label: Jawapan, name: a, widget: text, hint: 'Boleh guna **tebal**, senarai bermula "- " dan pautan [teks](url). Biar satu baris kosong antara perenggan.' }

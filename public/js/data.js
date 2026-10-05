@@ -1,18 +1,5 @@
 'use strict';
 
-/* ===== TETAPAN WEBSITE (ubah di sini) ===== */
-const SITE = {
-  name: 'Ammar Naufal',
-  tagline: 'Ejen TripCare 360 Takaful',
-  wa: '60139292911',
-  phone: '013-929 2911',
-  agentNo: '', // isi no. pendaftaran/lesen ejen jika ada; akan keluar di footer
-  socials: [], // contoh: { label: 'TikTok', short: 'TT', url: 'https://tiktok.com/@...' }
-  helpline: '+603-2785 6565',
-  claimsLine: '1 300 88 1007',
-  oneline: '1300 13 8888'
-};
-
 /* ===== KADAR CARUMAN (Brosur TripCare 360 Takaful, Etiqa) =====
    Lajur: [Domestik Area1 | Silver A2 A3 A4 | Gold A2 A3 A4 | Platinum A2 A3 A4]
    Baris: [1-5 hari, 6-10, 11-18, 19-30, setiap minggu tambahan, tahunan]  ('x' = tidak dilindungi) */

@@ -1,0 +1,164 @@
+---
+import Sprite from '../components/Sprite.astro';
+import { site, wa, tel, abs } from '../lib';
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  ogImage?: string;
+  type?: 'website' | 'article';
+  jsonLd?: object[];
+  noindex?: boolean;
+  calc?: boolean;
+  publishedTime?: string;
+}
+const { title, description, path = Astro.url.pathname, ogImage = site.seo.ogImage, type = 'website', jsonLd = [], noindex = false, calc = false, publishedTime } = Astro.props;
+const canonical = abs(path);
+const og = ogImage.startsWith('http') ? ogImage : abs(ogImage);
+const clientSite = { wa: site.whatsapp, phone: site.phoneDisplay, agentNo: site.agentNo };
+const nav = [
+  ['/#kelebihan', 'Kelebihan'],
+  ['/#semak-harga', 'Semak Harga'],
+  ['/#coverage', 'Coverage'],
+  ['/#claim', 'Cara Claim'],
+  ['/#tentang', 'Tentang'],
+  ['/artikel/', 'Artikel'],
+  ['/#faq', 'FAQ']
+];
+const waDefault = wa();
+---
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{title}</title>
+<meta name="description" content={description}>
+<link rel="canonical" href={canonical}>
+{noindex && <meta name="robots" content="noindex, nofollow">}
+<meta name="theme-color" content="#0d0d0e">
+<meta name="color-scheme" content="light">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Ammar TripCare">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta property="og:locale" content="ms_MY">
+<meta property="og:site_name" content={site.name}>
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:type" content={type}>
+<meta property="og:url" content={canonical}>
+<meta property="og:image" content={og}>
+{publishedTime && <meta property="article:published_time" content={publishedTime}>}
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="sitemap" href="/sitemap-index.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800&display=swap">
+<slot name="head" />
+<link rel="stylesheet" href="/css/style.css">
+<script is:inline>document.documentElement.classList.add('js')</script>
+{jsonLd.map(j => <script type="application/ld+json" set:html={JSON.stringify(j)} />)}
+</head>
+<body>
+<Sprite />
+<a class="skip" href="#kandungan">Terus ke kandungan</a>
+
+<aside class="rail" aria-label="Navigasi sisi">
+  <button class="rail-menu" type="button" data-open-menu aria-label="Buka menu">
+    <span class="burger"><i></i><i></i><i></i></span>
+    <span>Menu</span>
+  </button>
+  <div class="rail-icons">
+    <a class="rail-ic" href={waDefault} data-wa={site.defaultMessage} target="_blank" rel="noopener" aria-label={`WhatsApp ${site.shortName}`}><svg class="ic fill"><use href="#i-wa"/></svg></a>
+    <a class="rail-ic" href={tel} aria-label={`Telefon ${site.shortName}`}><svg class="ic"><use href="#i-phone"/></svg></a>
+    <span class="rail-socials">{site.socials.map(s => <a href={s.url} target="_blank" rel="noopener" aria-label={s.label}>{s.short || s.label.slice(0, 2)}</a>)}</span>
+  </div>
+  <a class="rail-quote" href="/#semak-harga"><span>Semak Harga</span></a>
+</aside>
+
+<header class="topbar" id="top">
+  <div class="topbar-in">
+    <a class="brand" href="/" aria-label={`${site.name}, laman utama`}>
+      <span class="brand-mark"><svg class="ic"><use href="#i-plane"/></svg></span>
+      <span class="brand-txt"><b>{site.name}</b><small>TripCare 360 Takaful</small></span>
+    </a>
+    <nav class="nav" aria-label="Menu utama">
+      {nav.map(([href, label]) => <a href={href}>{label}</a>)}
+    </nav>
+    <a class="btn btn-y btn-sm hide-m" href={waDefault} data-wa={site.defaultMessage} target="_blank" rel="noopener">WhatsApp {site.shortName} <svg class="ic"><use href="#i-arrow"/></svg></a>
+    <button class="menu-btn" type="button" data-open-menu aria-label="Buka menu"><span class="burger"><i></i><i></i><i></i></span></button>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true" role="dialog" aria-label="Menu">
+  <button class="menu-close" type="button" data-close-menu aria-label="Tutup menu"><svg class="ic"><use href="#i-close"/></svg></button>
+  <div class="menu-in">
+    <nav class="menu-nav">
+      <a href="/" data-close-menu><i>01</i>Utama</a>
+      {nav.map(([href, label], i) => <a href={href} data-close-menu><i>{String(i + 2).padStart(2, '0')}</i>{label}</a>)}
+    </nav>
+    <div class="menu-side">
+      <p class="menu-lab">Hubungi</p>
+      <a class="menu-big" href={waDefault} data-wa={site.defaultMessage} target="_blank" rel="noopener">WhatsApp {site.phoneDisplay}</a>
+      <p class="menu-lab">Helpline kecemasan 24/7 (Etiqa)</p>
+      <a class="menu-big" href="tel:+60327856565">+603-2785 6565</a>
+      <button class="btn btn-ghost-l" type="button" id="installBtn" hidden>Pasang app di telefon</button>
+    </div>
+  </div>
+</div>
+
+<main id="kandungan">
+  <slot />
+</main>
+
+<div class="band k" aria-hidden="true"><div class="track rev" data-marquee>
+  <span>TripCare 360 Takaful</span><i></i><span>Etiqa General Takaful</span><i></i><span>{site.name}</span><i></i><span>Travel dengan tenang</span><i></i><span>Semak harga dalam seminit</span><i></i>
+</div></div>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="foot-brand">{site.name}</p>
+      <p>{site.tagline}</p>
+      <p><a href={waDefault} data-wa={site.defaultMessage} target="_blank" rel="noopener">WhatsApp {site.phoneDisplay}</a></p>
+      {site.agentNo && <p>No. pendaftaran ejen: {site.agentNo}</p>}
+      <p><a href="/artikel/">Artikel</a></p>
+    </div>
+    <div class="legal">
+      <p><b>Laman web ini dikendalikan oleh ejen dan bukan laman web rasmi Etiqa.</b> Untuk maklumat rasmi, hubungi Etiqa Oneline 1300 13 8888 atau layari www.etiqa.com.my.</p>
+      <p>Etiqa General Takaful Berhad (201701025031) dilesenkan di bawah Islamic Financial Services Act 2013 dan dikawal selia oleh Bank Negara Malaysia. Dataran Maybank, No. 1 Jalan Maarof, 59000 Kuala Lumpur.</p>
+      <p>Manfaat yang dibayar di bawah produk yang layak dilindungi PIDM sehingga had tertentu. Sila rujuk Brosur TIPS PIDM atau hubungi Etiqa General Takaful Berhad atau PIDM (www.pidm.gov.my). Ahli PIDM.</p>
+      <p>Anda mesti mendedahkan semua fakta material seperti keadaan perubatan dan umur dengan betul. Caruman mesti dijelaskan sepenuhnya sebelum tarikh berkuat kuasa, jika tidak sijil tidak berkuat kuasa. Harga di laman ini adalah indikatif berdasarkan brosur dan belum termasuk cukai serta duti setem RM10 setiap sijil. Laman ini hanya untuk rujukan dan bukan kontrak. Untuk penerangan lengkap manfaat, pengecualian, terma dan syarat, sila rujuk Sijil Takaful.</p>
+    </div>
+  </div>
+  <p class="wrap copy">© <span id="yr"></span> {site.name}</p>
+</footer>
+
+<dialog class="modal" id="planModal" aria-labelledby="pmTitle">
+  <div class="modal-in">
+    <header><h3 id="pmTitle"></h3><button type="button" class="menu-close sm" data-close-modal aria-label="Tutup"><svg class="ic"><use href="#i-close"/></svg></button></header>
+    <div class="modal-body" id="pmBody"></div>
+  </div>
+</dialog>
+
+<a class="to-top" href="#top" aria-label="Kembali ke atas">
+  <svg viewBox="0 0 48 48" class="ring" aria-hidden="true"><circle cx="24" cy="24" r="21"/><circle id="ringP" cx="24" cy="24" r="21"/></svg>
+  <svg class="ic"><use href="#i-up"/></svg>
+</a>
+
+<nav class="mbar" aria-label="Tindakan pantas">
+  <a class="btn btn-k" href="/#semak-harga">Semak Harga</a>
+  <a class="btn btn-wa" href={waDefault} data-wa={site.defaultMessage} target="_blank" rel="noopener"><svg class="ic fill"><use href="#i-wa"/></svg>WhatsApp</a>
+</nav>
+
+<script is:inline set:html={`window.SITE=${JSON.stringify(clientSite)};`}></script>
+{calc && <script is:inline src="/js/data.js"></script>}
+<script is:inline src="/js/app.js"></script>
+{calc && <script is:inline src="/js/calc.js"></script>}
+</body>
+</html>

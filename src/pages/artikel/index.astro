@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { site, abs, getArticles } from '../../lib';
+
+const articles = await getArticles();
+const title = `Artikel Travel Takaful | ${site.name}`;
+const description = 'Panduan travel takaful TripCare 360 (Etiqa): beza plan, cara claim, kawasan perlindungan dan tip sebelum bertolak.';
+const jsonLd = [{
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  description,
+  url: abs('/artikel/')
+}];
+---
+<Base title={title} description={description} path="/artikel/" jsonLd={jsonLd}>
+  <section class="page-head dark">
+    <div class="wrap">
+      <p class="eyebrow">Artikel</p>
+      <h1>Panduan travel takaful</h1>
+      <p class="lead">Beza plan, cara claim, dan perkara yang patut anda tahu sebelum bertolak.</p>
+    </div>
+  </section>
+  <section class="sec">
+    <div class="wrap">
+      {articles.length
+        ? <div class="art-grid" data-alt>{articles.map(a => <ArticleCard entry={a} />)}</div>
+        : <p class="sub">Belum ada artikel. Sila datang semula tidak lama lagi.</p>}
+    </div>
+  </section>
+</Base>

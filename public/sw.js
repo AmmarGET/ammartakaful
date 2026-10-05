@@ -1,9 +1,10 @@
-const VERSION = 'tc360-v1';
+const VERSION = 'tc360-v2';
 const SHELL = [
-  './', 'index.html', 'css/style.css', 'js/data.js', 'js/app.js',
-  'manifest.webmanifest', 'img/ammar.webp', 'img/ammar-sm.webp',
-  'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png'
+  '/', '/css/style.css', '/js/data.js', '/js/app.js', '/js/calc.js',
+  '/manifest.webmanifest', '/img/ammar.webp',
+  '/icons/icon.svg', '/icons/icon-192.png', '/icons/icon-512.png', '/icons/apple-touch-icon.png'
 ];
+const SKIP = ['/admin', '/auth', '/callback'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -22,11 +23,14 @@ self.addEventListener('fetch', e => {
   const url = new URL(req.url);
   const isFont = url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com';
   if (url.origin !== location.origin && !isFont) return;
+  if (url.origin === location.origin && SKIP.some(p => url.pathname === p || url.pathname.startsWith(p + '/'))) return;
 
   if (req.mode === 'navigate') {
     e.respondWith(
-      fetch(req).then(r => { const copy = r.clone(); caches.open(VERSION).then(c => c.put('index.html', copy)); return r; })
-        .catch(() => caches.match('index.html'))
+      fetch(req).then(r => {
+        if (r.ok) { const copy = r.clone(); caches.open(VERSION).then(c => c.put(req, copy)); }
+        return r;
+      }).catch(async () => (await caches.match(req)) || (await caches.match('/')))
     );
     return;
   }
