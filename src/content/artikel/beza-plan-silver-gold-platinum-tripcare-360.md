@@ -2,7 +2,7 @@
 title: Beza Plan Silver, Gold dan Platinum TripCare 360 Takaful
 description: 'Bandingkan plan Silver, Gold dan Platinum TripCare 360 Takaful (Etiqa): had perubatan, bagasi, pembatalan trip dan contoh caruman. Pilih ikut jenis perjalanan anda.'
 date: 2026-10-03
-cover: ''
+cover: /uploads/20261005-141354.webp
 coverAlt: Hidup Anwar
 tags:
   - TripCare 360
