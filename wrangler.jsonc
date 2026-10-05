@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "ammartraveldraft",
+  "name": "ammartakaful",
   "main": "worker/index.js",
   "compatibility_date": "2025-09-01",
   "keep_vars": true,
