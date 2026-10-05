@@ -1,7 +1,7 @@
 # Konfigurasi panel admin (Sveltia CMS). base_url ditetapkan automatik dalam admin/index.html.
 backend:
   name: github
-  repo: annurprosolutions-cell/ammartraveldraft
+  repo: AmmarGET/ammartakaful
   branch: main
   auth_scope: repo
   commit_messages:
