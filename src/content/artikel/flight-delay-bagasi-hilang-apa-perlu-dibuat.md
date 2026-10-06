@@ -1,10 +1,13 @@
 ---
-title: "Flight Delay dan Bagasi Hilang: Apa Perlu Dibuat dan Berapa Boleh Dituntut"
-description: "Panduan bila flight delay atau bagasi hilang semasa travel: berapa had tuntutan TripCare 360 Takaful, tempoh hantar claim, dan nombor yang perlu dihubungi."
+title: 'Flight Delay dan Bagasi Hilang: Apa Perlu Dibuat dan Berapa Boleh Dituntut'
+description: 'Panduan bila flight delay atau bagasi hilang semasa travel: berapa had tuntutan TripCare 360 Takaful, tempoh hantar claim, dan nombor yang perlu dihubungi.'
 date: 2026-10-04
-cover: ""
-coverAlt: ""
-tags: ["Claim", "Flight delay", "Bagasi"]
+cover: /uploads/pasted-image-1791252279795.webp
+coverAlt: Airasia
+tags:
+  - Claim
+  - Flight delay
+  - Bagasi
 draft: false
 ---
 
