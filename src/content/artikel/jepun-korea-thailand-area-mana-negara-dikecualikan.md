@@ -1,10 +1,13 @@
 ---
-title: "Jepun, Korea atau Eropah: Masuk Area Mana? Negara Dikecualikan TripCare 360"
-description: "Senarai Area 1, 2, 3 dan 4 TripCare 360 Takaful, termasuk negara Asia terpilih (Area 2) dan negara yang dikecualikan seperti Nepal. Semak sebelum anda beli."
+title: 'Jepun, Korea atau Eropah: Masuk Area Mana? Negara Dikecualikan TripCare 360'
+description: Senarai Area 1, 2, 3 dan 4 TripCare 360 Takaful, termasuk negara Asia terpilih (Area 2) dan negara yang dikecualikan seperti Nepal. Semak sebelum anda beli.
 date: 2026-10-05
-cover: ""
-coverAlt: ""
-tags: ["Area", "Destinasi", "Negara dikecualikan"]
+cover: /uploads/pasted-image-1791254340589.webp
+coverAlt: ''
+tags:
+  - Area
+  - Destinasi
+  - Negara dikecualikan
 draft: false
 ---
 
