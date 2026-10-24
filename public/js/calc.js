@@ -25,6 +25,39 @@ const AREA_SHORT = { 1: 'Domestik', 2: 'Area 2', 3: 'Area 3', 4: 'Area 4' };
 const form = $('#calcForm');
 const depEl = $('#dep'), retEl = $('#ret');
 const st = { mode: 'single', cat: 'ind', dests: [], addons: new Set() };
+  /* ===== GA4 Conversion Tracking ===== */
+
+window.dataLayer = window.dataLayer || [];
+
+const trackEvent = (event, params = {}) => {
+  window.dataLayer.push({
+    event,
+    ...params
+  });
+};
+
+let calculatorStarted = false;
+let quoteGenerated = false;
+
+form.addEventListener('input', () => {
+  if (calculatorStarted) return;
+
+  calculatorStarted = true;
+
+  trackEvent('calculator_start', {
+    product_type: 'travel_takaful'
+  });
+}, { capture: true });
+
+form.addEventListener('change', () => {
+  if (calculatorStarted) return;
+
+  calculatorStarted = true;
+
+  trackEvent('calculator_start', {
+    product_type: 'travel_takaful'
+  });
+}, { capture: true });
 
 const pad = n => String(n).padStart(2, '0');
 const now = new Date();
