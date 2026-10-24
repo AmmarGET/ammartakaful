@@ -342,6 +342,22 @@ function openPlan(id) {
   modal.showModal();
 }
 plansEl.addEventListener('click', e => { const b = e.target.closest('[data-detail]'); if (b) openPlan(b.dataset.detail); });
+  /* ===== Tracking Plan Selected ===== */
+
+plansEl.addEventListener('click', e => {
+
+  const link = e.target.closest('a[data-plan]');
+
+  if (!link) return;
+
+  trackEvent('plan_selected', {
+    product_type: 'travel_takaful',
+    plan_name: link.dataset.plan,
+    trip_type: st.mode,
+    traveller_category: st.cat
+  });
+
+});
 $$('[data-close-modal]').forEach(b => b.addEventListener('click', () => modal.close()));
 modal.addEventListener('click', e => { if (e.target === modal) modal.close(); });
 
