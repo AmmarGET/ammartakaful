@@ -260,7 +260,14 @@ function update() {
       ${lines.length ? `<div class="plan-lines"><div><span>Caruman asas</span><b>${rm(base)}</b></div>${lines.map(l => `<div><span>${esc(l[0])}</span><b>+${rm(l[1])}</b></div>`).join('')}</div>` : ''}
       <dl>${HEAD.map(h => { const v = h[1][p.idx]; return `<div><dt>${h[0]}</dt><dd class="${/Tiada/.test(v) ? 'no' : ''}">${v}</dd></div>`; }).join('')}</dl>
       <button type="button" class="btn btn-line" data-detail="${p.id}">Lihat semua coverage</button>
-      <a class="btn btn-k" href="${waUrl(msg)}" target="_blank" rel="noopener"><svg class="ic fill"><use href="#i-wa"/></svg>Pilih ${p.name}</a>
+      <a class="btn btn-k"
+   href="${waUrl(msg)}"
+   data-plan="${p.id}"
+   target="_blank"
+   rel="noopener">
+   <svg class="ic fill"><use href="#i-wa"/></svg>
+   Pilih ${p.name}
+</a>
     </article>`;
   });
 
