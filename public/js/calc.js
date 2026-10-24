@@ -274,7 +274,20 @@ function update() {
   plansEl.innerHTML = cards.filter(Boolean).join('');
   fineEl.hidden = false;
   fineEl.textContent = 'Harga indikatif berdasarkan brosur TripCare 360 Takaful (Etiqa), belum termasuk cukai kerajaan dan duti setem RM10 bagi setiap sijil. Caruman akhir disahkan semasa pendaftaran.';
-}
+/* Tracking quotation berjaya */
+
+if (!quoteGenerated && plansEl.querySelector('.plan')) {
+
+  quoteGenerated = true;
+
+  trackEvent('quote_generated', {
+    product_type: 'travel_takaful',
+    trip_type: st.mode,
+    travel_area: AREA_SHORT[area],
+    traveller_category: st.cat
+  });
+
+}}
 
 function waMessage(p, total, area, n, lines) {
   const annual = st.mode === 'annual';
